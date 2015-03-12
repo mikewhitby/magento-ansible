@@ -3,10 +3,10 @@ Vagrant.require_version ">= 1.5"
 Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
-        v.name = "Magento"
+        v.name = "Magento Ansible"
         v.customize [
             "modifyvm", :id,
-            "--name", "Magento",
+            "--name", "Magento Ansible",
             "--memory", 2048,
             "--natdnshostresolver1", "on",
             "--cpus", 1,
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
         ansible.limit = 'all'
         ansible.extra_vars = {
             private_interface: "192.168.56.101",
-            hostname: "Magento"
+            hostname: "magento-ansible"
         }
     end
     
