@@ -35,7 +35,7 @@ type `mysql`. If you're not sure where to go next, see the section
 
 Point a DNS label at the box:
 
-    echo "192.168.56.101 magento.dev | sudo tee -a /etc/hosts
+    echo "192.168.56.101 magento.dev" | sudo tee -a /etc/hosts
 
 Create a DB:
 
