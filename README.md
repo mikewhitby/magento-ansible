@@ -37,13 +37,13 @@ Point a DNS label at the box:
 
     echo "192.168.56.101 magento.dev" | sudo tee -a /etc/hosts
 
-Create a DB:
+Create a DB and install Magento
 
     vagrant ssh
     mysqladmin create magento
+	sudo n98-magerun install --installationFolder=/vagrant/public
 
-Now copy a release of Magento in to the `public` folder and visit
-[magento.dev](magento.dev) to install Magento.
+Done, just visit [magento.dev](magento.dev)!
 
 ### Set Up a Cron Job
 
