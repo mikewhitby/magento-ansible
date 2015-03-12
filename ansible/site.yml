@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    timezone: Europe/London
+    vagrant_root: /vagrant
+  roles:
+    - init
+    - apache
+    - php
+    - xdebug
+    - xhprof
+    - mysql
+    - mailcatcher
+    - magento
+    - n98-magerun

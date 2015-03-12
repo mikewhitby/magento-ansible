@@ -1,0 +1,35 @@
+---
+- name: Update apt
+  apt: update_cache=yes
+
+- name: Install basic system packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - python-software-properties
+    - vim
+    - git
+
+- name: Set the timezone
+  template: src=timezone.tpl dest=/etc/timezone
+  register: timezoneset
+
+- name: Run dpkg-reconfigure for timezone change
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  when: timezoneset|changed
+
+- name: Set the hostname
+  shell: hostname {{ hostname }}
+  when: ansible_hostname != hostname
+  register: hostnameset
+
+- name: Update /etc/hostname
+  shell: echo {{ hostname }} > /etc/hostname
+  when: hostnameset|changed
+
+- name: Update /etc/hosts
+  lineinfile: dest=/etc/hosts
+              regexp='^127\.0\.0\.1'
+              line='127.0.0.1 localhost {{ hostname }}'
+  when: hostnameset|changed

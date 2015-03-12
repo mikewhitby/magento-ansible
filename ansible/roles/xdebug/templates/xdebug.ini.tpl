@@ -1,0 +1,9 @@
+zend_extension=/usr/lib/php5/20100525/xdebug.so
+xdebug.remote_enable=On
+xdebug.remote_connect_back=On
+xdebug.collect_params=2
+xdebug.profiler_enable_trigger=1
+xdebug.profiler_output_dir={{ vagrant_root }}/profiler-runs/xdebug
+xdebug.trace_enable_trigger=1
+xdebug.trace_output_dir={{ vagrant_root }}/profiler-runs/xdebug
+xdebug.max_nesting_level=1000

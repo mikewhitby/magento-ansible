@@ -1,0 +1,10 @@
+---
+- name: Install PHP packages required for Magento
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5-curl
+    - php5-gd
+    - php5-mcrypt
+    - php5-mysql
+    - php5-intl
+  notify: restart apache

@@ -1,0 +1,10 @@
+---
+- name: Install XDebug
+  command: pecl install xdebug
+  register: xdebug_result
+  changed_when: "'already installed' not in xdebug_result.stdout"
+  failed_when: "xdebug_result.stderr or ('ERROR' in xdebug_result.stdout)"
+
+- name: Add XDebug config
+  template: src=xdebug.ini.tpl dest=/etc/php5/conf.d/30-xdebug-config.ini
+  notify: restart php5-fpm

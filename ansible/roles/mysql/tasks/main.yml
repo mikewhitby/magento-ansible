@@ -1,0 +1,11 @@
+---
+- name: Install MySQL
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+
+- name: Set credentials in vagrant .my.cnf
+  sudo: no
+  template: src=my.cnf.tpl dest=~/.my.cnf

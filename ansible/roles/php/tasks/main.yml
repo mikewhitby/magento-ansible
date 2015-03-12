@@ -1,0 +1,39 @@
+---
+- name: Add ondrej ppa repository for PHP 5.4
+  apt_repository: repo=ppa:ondrej/php5-oldstable update_cache=yes
+
+- name: Install PHP
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5
+    - php5-cli
+    - php5-fpm
+    - php5-dev
+    - php-pear
+
+- name: Make php-fpm listen on 127.0.0.1:9000
+  lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
+              regexp='listen ='
+              line='listen = 127.0.0.1:9000'
+  notify: restart php5-fpm
+
+- name: Set PHP settings
+  lineinfile: dest=/etc/php5/{{ item.file }}/php.ini
+              regexp='{{ item.key }} ='
+              line='{{ item.key }} = {{ item.value }}'
+  with_items:
+    - { file: 'fpm', key: 'date.timezone', value: '{{ timezone }}' }
+    - { file: 'cli', key: 'date.timezone', value: '{{ timezone }}' }
+    - { file: 'fpm', key: 'memory_limit', value: '256M' }
+    - { file: 'cli', key: 'memory_limit', value: '256M' }
+    - { file: 'fpm', key: 'max_execution_time', value: '18000' }
+    - { file: 'cli', key: 'max_execution_time', value: '18000' }
+    - { file: 'fpm', key: 'error_reporting', value: '-1' }
+    - { file: 'cli', key: 'error_reporting', value: '-1' }
+    - { file: 'fpm', key: 'display_errors', value: '1' }
+    - { file: 'cli', key: 'display_errors', value: '1' }
+    - { file: 'fpm', key: 'display_startup_errors', value: '1' }
+    - { file: 'cli', key: 'display_startup_errors', value: '1' }
+    - { file: 'fpm', key: 'error_log', value: '{{ vagrant_root }}/logs/php/error.log' }
+    - { file: 'cli', key: 'error_log', value: '{{ vagrant_root }}/logs/php/error.log' }
+  notify: restart php5-fpm

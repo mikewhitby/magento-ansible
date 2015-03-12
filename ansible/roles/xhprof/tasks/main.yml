@@ -1,0 +1,31 @@
+---
+- name: Install XHProf
+  command: pecl install channel://pecl.php.net/xhprof-0.9.4
+  register: xhprof
+  changed_when: "'already installed' not in xhprof.stdout"
+  failed_when: "xhprof.stderr or ('ERROR' in xhprof.stdout)"
+
+- name: Create header and footer directory
+  file: path=/usr/share/php/xhprof_includes/ state=directory
+
+- name: Create header and footer files
+  template: src={{ item }}.php.tpl dest=/usr/share/php/xhprof_includes/{{ item }}.php
+  with_items:
+    - header
+    - footer
+
+- name: Add XHProf PHP config
+  template: src=xhprof.ini.tpl dest=/etc/php5/mods-available/xhprof.ini
+  notify: restart php5-fpm
+
+- name: Enable XHProf PHP config
+  command: php5enmod xhprof creates=/etc/php5/conf.d/20-xhprof.ini
+  notify: restart php5-fpm
+
+- name: Add XHProf site
+  template: src=xhprof-ui.conf.tpl dest=/etc/apache2/sites-available/000-xhprof-ui.conf
+  notify: restart apache
+
+- name: Enable XHProf site
+  command: a2ensite 000-xhprof-ui.conf creates=/etc/apache2/sites-enabled/000-xhprof-ui.conf
+  notify: restart apache

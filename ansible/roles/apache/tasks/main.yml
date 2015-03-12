@@ -1,0 +1,29 @@
+---
+- name: Add ondrej ppa repository for Apache 2.4
+  apt_repository: repo=ppa:ondrej/apache2 update_cache=yes
+
+- name: Install Apache
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - apache2
+    - libapache2-mod-fastcgi
+
+- name: Enable Apache Modules
+  apache2_module: state=present name={{ item }}
+  with_items:
+    - rewrite
+    - vhost_alias
+    - proxy_fcgi
+  notify: restart apache
+
+- name: Disable default site
+  command: a2dissite 000-default.conf removes=/etc/apache2/sites-enabled/000-default.conf
+  notify: restart apache
+
+- name: Add vagrant site
+  template: src=vhost.conf.tpl dest=/etc/apache2/sites-available/000-vagrant.conf
+  notify: restart apache
+
+- name: Enable vagrant site
+  command: a2ensite 000-vagrant.conf creates=/etc/apache2/sites-enabled/000-vagrant.conf
+  notify: restart apache
