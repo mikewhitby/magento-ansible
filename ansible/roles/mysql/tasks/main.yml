@@ -6,6 +6,13 @@
     - mysql-client
     - python-mysqldb
 
+- name: Set MySQL settings
+  template: src=system-my.cnf.tpl dest=/etc/mysql/conf.d/vagrant.cnf
+  notify: restart mysql
+
+- name: Allow root access from anywhere
+  mysql_user: name=root password= host=% priv=*.*:ALL state=present
+
 - name: Set credentials in vagrant .my.cnf
   sudo: no
-  template: src=my.cnf.tpl dest=~/.my.cnf
+  template: src=vagrant-my.cnf.tpl dest=~/.my.cnf
