@@ -12,13 +12,13 @@ feedback of people using this succesfully (or not) on other OS's.
 
 Make sure you have these things (you've already got [brew][12], right?!):
 
-	brew install vagrant
-	vagrant plugin install vagrant-bindfs
-   brew install ansible
+    brew install vagrant
+    vagrant plugin install vagrant-bindfs
+    brew install ansible
 
 Then run:
 
-	vagrant up
+    vagrant up
 
 The MySQL username is `root` with no password, you can simply SSH in and
 type `mysql`. If you're not sure where to go next, see the section
@@ -44,7 +44,7 @@ Create a DB and install Magento
 
     vagrant ssh
     mysqladmin create magento
-	sudo n98-magerun install --installationFolder=/vagrant/public
+    sudo n98-magerun install --installationFolder=/vagrant/public
 
 Done, just visit [magento.dev](magento.dev)!
 
