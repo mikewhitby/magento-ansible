@@ -30,7 +30,10 @@ Vagrant.configure("2") do |config|
     
     if Vagrant.has_plugin?('vagrant-bindfs')
         config.vm.synced_folder ".", "/mnt/bindfs", type: "nfs"
-        config.bindfs.bind_folder "/mnt/bindfs", "/vagrant", user: 'www-data', group: 'www-data'
+        config.bindfs.bind_folder "/mnt/bindfs", "/vagrant",
+            user: 'www-data',
+            group: 'www-data',
+            perms: "ug=rwX:o=rD"
     else
         config.vm.synced_folder ".", "/vagrant", type: "nfs"
     end

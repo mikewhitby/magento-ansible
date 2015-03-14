@@ -33,3 +33,6 @@
               regexp='^127\.0\.0\.1'
               line='127.0.0.1 localhost {{ hostname }}'
   when: hostnameset|changed
+
+- name: Add the vagrant user to the www-data group
+  user: name=vagrant groups=www-data append=yes
