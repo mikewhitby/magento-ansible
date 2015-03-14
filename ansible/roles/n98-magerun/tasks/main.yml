@@ -4,3 +4,6 @@
 
 - name: Make N98 executable
   file: path=/usr/local/bin/n98-magerun mode="755"
+
+- name: Add N98 config
+  template: src=n98-magerun.yaml.tpl dest=/etc/n98-magerun.yaml
