@@ -7,9 +7,11 @@
   with_items:
     - php5
     - php5-cli
+    - php-apc
     - php5-fpm
     - php5-dev
     - php-pear
+  notify: restart php5-fpm
 
 - name: Make php-fpm listen on 127.0.0.1:9000
   lineinfile: dest=/etc/php5/fpm/pool.d/www.conf

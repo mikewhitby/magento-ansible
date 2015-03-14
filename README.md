@@ -1,6 +1,6 @@
 # Magento Ansible Vagrant Box
 
-An [idempotent][8] Ubuntu 12.04 LTS / Apache 2.4 / PHP 5.4 / PHP-FPM /
+An [idempotent][8] Ubuntu 12.04 LTS / Apache 2.4 / PHP 5.4 / APC / PHP-FPM /
 MySQL 5.5 / XDebug/ XHProf / Mailcatcher Vagrant box, built via Ansible,
 set up with Magento in mind.
 
