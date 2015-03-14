@@ -2,6 +2,4 @@
 /public/*
 /profiler-runs/xdebug/*
 /profiler-runs/xhprof/*
-/logs/apache/*
-/logs/php/*
 !**/.gitkeep

@@ -79,13 +79,6 @@ Stops e-mails going to their intended recipients,a nd instead shows them
 in a web interface, which is at [http://192.168.56.101:82][3], which
 allows you to see the e-mails that have been sent.
 
-### Logs
-
-Apache and PHP logs are in `logs`, though please note there is a 3
-second delay on them due to NFS caching. I'm not fussed enough to do
-anything about this, read [this article][7] if it bugs you and you want
-to fix it.
-
 
 ## Notes
 
@@ -145,7 +138,6 @@ overridden. Basically, I just wanted to keep things simple.
 [4]: https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en "Chrome XDebug Helper"
 [5]: https://chrome.google.com/webstore/detail/xhprof-helper/adnlhmmjijeflmbmlpmhilkicpnodphi?hl=en "Chrome XHProf Helper"
 [6]: https://blackfire.io/ "Blackfire Profiler"
-[7]: http://www.sebastien-han.fr/blog/2012/12/18/noac-performance-impact-on-web-applications/ "NFS Attribute Caching Performance Impact on Web Applications"
 [8]: http://en.wikipedia.org/wiki/Idempotence "Idempotence"
 [9]: http://bindfs.org/ "BindFS"
 [10]: https://ngrok.com/ "Introspected tunnels to localhost"

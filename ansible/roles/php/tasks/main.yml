@@ -34,6 +34,4 @@
     - { file: 'cli', key: 'display_errors', value: '1' }
     - { file: 'fpm', key: 'display_startup_errors', value: '1' }
     - { file: 'cli', key: 'display_startup_errors', value: '1' }
-    - { file: 'fpm', key: 'error_log', value: '{{ vagrant_root }}/logs/php/error.log' }
-    - { file: 'cli', key: 'error_log', value: '{{ vagrant_root }}/logs/php/error.log' }
   notify: restart php5-fpm
